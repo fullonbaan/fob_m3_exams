@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FOB M3 Certification Portal | Infor M3 Practice Exams</title>
+<title>FOB M3 Certification Portal | Infor M3 Certification Exams</title>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -77,34 +77,62 @@ header{background:var(--surf);border-bottom:1px solid var(--rim);padding:0 28px;
 .eyebrow-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 
 /* ── HOME ── */
-#home{max-width:960px;margin:0 auto;padding:52px 36px 100px;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:22px;}
-.badge-pulse{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:bpulse 2s infinite;}
+#home{max-width:1340px;margin:0 auto;padding:48px 48px 100px;}
+@media(max-width:1100px){#home{padding:40px 32px 100px;}}
+@media(max-width:700px){#home{padding:28px 18px 80px;}}
+
+.hero-section{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:44px;padding-bottom:36px;border-bottom:1px solid var(--rim);}
+@media(max-width:860px){.hero-section{flex-direction:column;align-items:flex-start;gap:20px;margin-bottom:28px;}}
+.hero-left{flex:1;min-width:0;}
+.hero-right{flex-shrink:0;}
+.hero-stats-row{display:flex;align-items:center;gap:24px;margin-bottom:16px;}
+@media(max-width:860px){.hero-stats-row{margin-bottom:12px;}}
+.hero-stat{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.hero-stat-val{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--gold);line-height:1;}
+.hero-stat-lbl{font-size:10px;color:var(--textM);letter-spacing:.07em;text-transform:uppercase;}
+.hero-stat-divider{width:1px;height:36px;background:var(--rim2);}
+
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.22);border-radius:5px;padding:4px 12px;font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;}
+.badge-pulse{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:bpulse 2s infinite;}
 @keyframes bpulse{0%,100%{opacity:1;}50%{opacity:.3;}}
-.hero-title{font-size:clamp(28px,4.5vw,44px);font-weight:800;line-height:1.1;margin-bottom:12px;letter-spacing:-.02em;}
-.hero-sub{font-size:15px;color:var(--textS);line-height:1.75;max-width:640px;margin-bottom:44px;}
+.hero-title{font-family:var(--serif);font-size:clamp(30px,3.5vw,50px);font-weight:700;line-height:1.08;margin-bottom:14px;letter-spacing:-.01em;}
+.hero-title span{background:var(--gGold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:14px;color:var(--textS);line-height:1.75;max-width:560px;}
+
+/* ── CERT GROUP PANELS ── */
+.cert-group{background:var(--surf);border:1px solid var(--rim);border-radius:18px;padding:24px 24px 20px;margin-bottom:18px;position:relative;overflow:hidden;}
+.cert-group::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--rim2),transparent);}
+.cert-group-core{border-left:3px solid rgba(201,168,76,.45);}
+.cert-group-cloud{border-left:3px solid rgba(34,211,238,.35);}
+
+.track-group-label{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.tgl-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:4px 12px;border-radius:5px;}
+.tgl-badge-core{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.25);}
+.tgl-badge-cloud{background:rgba(34,211,238,.08);color:var(--cyan);border:1px solid rgba(34,211,238,.22);}
+.tgl-count{font-family:var(--mono);font-size:10px;color:var(--textM);margin-left:auto;}
+
+/* ── TRACK GRIDS ── */
+.track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.track-grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
+@media(max-width:1280px){.track-grid-5{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){.track-grid,.track-grid-5{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.track-grid,.track-grid-5{grid-template-columns:1fr;}}
 
 /* ── TRACK CARDS ── */
-.track-group-label{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--textM);margin-bottom:14px;margin-top:4px;}
-.track-group-label .tgl-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;}
-.track-group-label.cloud .tgl-dot{background:var(--cyan);}
-.track-group-divider{height:1px;background:linear-gradient(90deg,transparent,var(--rim2),transparent);margin:28px 0 26px;}
-.track-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:12px;}
-
-.track-card{background:var(--surf);border:2px solid var(--rim);border-radius:22px;padding:28px 26px 24px;cursor:pointer;position:relative;overflow:hidden;box-shadow:var(--smSm);transition:transform var(--dur) var(--ease),box-shadow var(--dur),border-color var(--dur);}
+.track-card{background:var(--surf2);border:1.5px solid var(--rim);border-radius:14px;padding:18px 16px 14px;cursor:pointer;position:relative;overflow:hidden;transition:transform var(--dur) var(--ease),box-shadow var(--dur),border-color var(--dur);}
 .track-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--rim2),transparent);}
-.track-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:50%;background:var(--sheen);pointer-events:none;}
-.track-card:hover{transform:translateY(-4px);box-shadow:var(--smMd);}
-.track-card.sel-fin{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.15),var(--smMd);}
-.track-card.sel-mfg{border-color:var(--teal);box-shadow:0 0 0 3px rgba(45,212,191,.15),var(--smMd);}
-.track-card.sel-scm{border-color:var(--purple);box-shadow:0 0 0 3px rgba(168,85,247,.15),var(--smMd);}
-.track-card.sel-dist{border-color:var(--amber);box-shadow:0 0 0 3px rgba(245,158,11,.15),var(--smMd);}
-.track-card.sel-cf2{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(34,211,238,.15),var(--smMd);}
-.track-card.sel-fnb{border-color:var(--emerald);box-shadow:0 0 0 3px rgba(52,211,153,.15),var(--smMd);}
-.track-card.sel-wap{border-color:#e879f9;box-shadow:0 0 0 3px rgba(232,121,249,.15),var(--smMd);}
-.track-card.sel-sml{border-color:#fb923c;box-shadow:0 0 0 3px rgba(251,146,60,.15),var(--smMd);}
+.track-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:40%;background:var(--sheen);pointer-events:none;}
+.track-card:hover{transform:translateY(-3px);box-shadow:var(--smMd);border-color:var(--rim2);}
+.track-card.sel-fin{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,168,76,.12),var(--smSm);}
+.track-card.sel-mfg{border-color:var(--teal);box-shadow:0 0 0 2px rgba(45,212,191,.12),var(--smSm);}
+.track-card.sel-scm{border-color:var(--purple);box-shadow:0 0 0 2px rgba(168,85,247,.12),var(--smSm);}
+.track-card.sel-dist{border-color:var(--amber);box-shadow:0 0 0 2px rgba(245,158,11,.12),var(--smSm);}
+.track-card.sel-cf2{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(34,211,238,.12),var(--smSm);}
+.track-card.sel-fnb{border-color:var(--emerald);box-shadow:0 0 0 2px rgba(52,211,153,.12),var(--smSm);}
+.track-card.sel-wap{border-color:#e879f9;box-shadow:0 0 0 2px rgba(232,121,249,.12),var(--smSm);}
+.track-card.sel-sml{border-color:#fb923c;box-shadow:0 0 0 2px rgba(251,146,60,.12),var(--smSm);}
 
-.track-icon-wrap{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;position:relative;z-index:1;flex-shrink:0;}
+.track-icon-wrap{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;position:relative;z-index:1;flex-shrink:0;}
 .ti-fin{background:var(--gGold);}
 .ti-mfg{background:var(--gTeal);}
 .ti-scm{background:linear-gradient(135deg,#a855f7,#7c3aed);}
@@ -114,7 +142,7 @@ header{background:var(--surf);border-bottom:1px solid var(--rim);padding:0 28px;
 .ti-wap{background:linear-gradient(135deg,#e879f9,#c026d3);}
 .ti-sml{background:linear-gradient(135deg,#fb923c,#ea580c);}
 
-.track-exam-code{position:absolute;top:18px;right:18px;z-index:2;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;font-weight:700;}
+.track-exam-code{position:absolute;top:12px;right:12px;z-index:2;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;font-weight:700;}
 .tc-fin{background:rgba(201,168,76,.12);color:var(--gold);border:1px solid rgba(201,168,76,.28);}
 .tc-mfg{background:rgba(45,212,191,.12);color:var(--teal);border:1px solid rgba(45,212,191,.28);}
 .tc-scm{background:rgba(168,85,247,.12);color:var(--purple);border:1px solid rgba(168,85,247,.28);}
@@ -124,7 +152,7 @@ header{background:var(--surf);border-bottom:1px solid var(--rim);padding:0 28px;
 .tc-wap{background:rgba(232,121,249,.12);color:#e879f9;border:1px solid rgba(232,121,249,.28);}
 .tc-sml{background:rgba(251,146,60,.12);color:#fb923c;border:1px solid rgba(251,146,60,.28);}
 
-.track-sel-ring{width:22px;height:22px;border-radius:50%;border:2px solid var(--rim2);position:absolute;bottom:18px;right:18px;z-index:2;display:flex;align-items:center;justify-content:center;transition:all var(--dur);}
+.track-sel-ring{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--rim2);position:absolute;bottom:12px;right:12px;z-index:2;display:flex;align-items:center;justify-content:center;transition:all var(--dur);}
 .track-card.sel-fin .track-sel-ring{background:var(--gGold);border-color:transparent;}
 .track-card.sel-mfg .track-sel-ring{background:var(--gTeal);border-color:transparent;}
 .track-card.sel-scm .track-sel-ring{background:linear-gradient(135deg,#a855f7,#7c3aed);border-color:transparent;}
@@ -133,17 +161,17 @@ header{background:var(--surf);border-bottom:1px solid var(--rim);padding:0 28px;
 .track-card.sel-fnb .track-sel-ring{background:linear-gradient(135deg,#34d399,#059669);border-color:transparent;}
 .track-card.sel-wap .track-sel-ring{background:linear-gradient(135deg,#e879f9,#c026d3);border-color:transparent;}
 .track-card.sel-sml .track-sel-ring{background:linear-gradient(135deg,#fb923c,#ea580c);border-color:transparent;}
-.track-sel-ring::after{content:'✓';font-size:10px;font-weight:800;color:#0a0b0d;display:none;}
+.track-sel-ring::after{content:'✓';font-size:9px;font-weight:800;color:#0a0b0d;display:none;}
 .track-card.sel-fin .track-sel-ring::after,.track-card.sel-mfg .track-sel-ring::after,.track-card.sel-scm .track-sel-ring::after,.track-card.sel-dist .track-sel-ring::after,.track-card.sel-cf2 .track-sel-ring::after,.track-card.sel-fnb .track-sel-ring::after,.track-card.sel-wap .track-sel-ring::after,.track-card.sel-sml .track-sel-ring::after{display:block;}
 
-.track-title{font-size:18px;font-weight:800;margin-bottom:6px;position:relative;z-index:1;letter-spacing:-.01em;}
-.track-code-line{font-family:var(--mono);font-size:11px;color:var(--textM);margin-bottom:8px;position:relative;z-index:1;}
+.track-title{font-size:13px;font-weight:700;margin-bottom:3px;position:relative;z-index:1;letter-spacing:-.01em;line-height:1.3;}
+.track-code-line{font-family:var(--mono);font-size:9px;color:var(--textM);margin-bottom:10px;position:relative;z-index:1;line-height:1.4;opacity:.75;}
 .track-desc{font-size:13px;color:var(--textS);line-height:1.6;margin-bottom:16px;position:relative;z-index:1;}
-.track-tags{display:flex;flex-wrap:wrap;gap:7px;position:relative;z-index:1;}
-.ttag{font-family:var(--mono);font-size:10px;letter-spacing:.06em;padding:3px 9px;border-radius:20px;color:var(--textM);background:var(--surf2);border:1px solid var(--rim);}
-
+.track-tags{display:flex;flex-wrap:wrap;gap:5px;position:relative;z-index:1;}
+.ttag{font-family:var(--mono);font-size:9px;letter-spacing:.04em;padding:2px 7px;border-radius:3px;color:var(--textM);background:var(--surf3);border:1px solid var(--rim);}
+.track-group-divider{display:none;}
 /* ── REGISTRATION CARD ── */
-.reg-card{background:var(--surf);border:1px solid var(--rim);border-radius:20px;padding:32px;margin-top:32px;position:relative;overflow:hidden;}
+.reg-card{background:var(--surf);border:1px solid var(--rim);border-radius:20px;padding:32px;margin-top:24px;position:relative;overflow:hidden;}
 .reg-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--rim2),transparent);}
 .reg-track-prompt{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--textM);margin-bottom:20px;}
 .reg-title{font-size:18px;font-weight:800;margin-bottom:4px;}
@@ -480,143 +508,147 @@ canvas#cert-canvas{display:none;}
 <canvas id="cert-canvas" width="1200" height="850"></canvas>
 <!-- ████ HOME ████ -->
 <div id="home" class="screen active">
-  <div class="hero-badge"><span class="badge-pulse"></span>Infor M3 Certification Suite</div>
-  <h1 class="hero-title">Infor M3 Practice<br>Certification Exams</h1>
-  <p class="hero-sub">Select your certification track below. Each exam is 30 questions, requires 70% to pass, and is aligned to the official Infor M3 exam syllabus. Pay ₹499 via UPI to unlock your exam and get instant results.</p>
 
-  <!-- ── Group 1: Core M3 Certifications ─────────────────────────── -->
-  <div class="track-group-label">
-    <span class="tgl-dot"></span>
-    Core M3 Certifications
-  </div>
-  <div class="track-grid">
-    <!-- M3-123 Finance -->
-    <div class="track-card" id="card-fin" onclick="selectTrack('fin')">
-      <div class="track-exam-code tc-fin">M3-123</div>
-      <div class="track-icon-wrap ti-fin">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0a0b0d" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-      </div>
-      <div class="track-title">M3 Finance Consultant</div>
-      <div class="track-code-line">Infor Certified M3 Finance Consultant</div>
-      <div class="track-desc">Accounts Payable, Accounts Receivable, General Ledger, cost accounting (CAS900), accounting rules, FAM functions, payment proposals, three-way match, VAT reporting, and year-end procedures.</div>
-      <div class="track-tags">
-        <span class="ttag">AP / AR</span><span class="ttag">GL</span><span class="ttag">Cost Accounting</span><span class="ttag">FAM</span><span class="ttag">VAT</span>
-      </div>
-      <div class="track-sel-ring" id="ring-fin"></div>
+  <!-- ── Hero ── -->
+  <div class="hero-section">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="badge-pulse"></span>Infor M3 Certification Suite</div>
+      <h1 class="hero-title">Infor M3<br><span>Certification Exams</span></h1>
+      <p class="hero-sub">30 questions per exam · 70% to pass · Aligned to official Infor M3 syllabus · Instant results.</p>
     </div>
+    <div class="hero-right">
+      <div class="hero-stats-row">
+        <div class="hero-stat">
+          <div class="hero-stat-val">8</div>
+          <div class="hero-stat-lbl">Exam Tracks</div>
+        </div>
 
-    <!-- M3-504 Manufacturing -->
-    <div class="track-card" id="card-mfg" onclick="selectTrack('mfg')">
-      <div class="track-exam-code tc-mfg">M3-504</div>
-      <div class="track-icon-wrap ti-mfg">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M21 12h-2M17.66 17.66l-1.41-1.41M12 21v-2M6.34 17.66l-1.41 1.41M3 12H1M6.34 6.34L4.93 4.93M12 3V1"/></svg>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">70%</div>
+          <div class="hero-stat-lbl">Pass Score</div>
+        </div>
       </div>
-      <div class="track-title">M3 Cloud Manufacturing</div>
-      <div class="track-code-line">Infor Certified M3 Cloud Manufacturing &amp; Planning</div>
-      <div class="track-desc">Product structure (PDS001), work centers, BOM, manufacturing orders (PMS100/170), MRP/MPS, planning policies, capacity planning (CPS), load analysis, Gantt charts, and year-end MO procedures.</div>
-      <div class="track-tags">
-        <span class="ttag">BOM / Routing</span><span class="ttag">MRP / MPS</span><span class="ttag">Capacity</span><span class="ttag">MO Lifecycle</span>
-      </div>
-      <div class="track-sel-ring" id="ring-mfg"></div>
-    </div>
-    <!-- IM3-310 Supply Chain -->
-    <div class="track-card" id="card-scm" onclick="selectTrack('scm')">
-      <div class="track-exam-code tc-scm">IM3-310</div>
-      <div class="track-icon-wrap ti-scm">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-      </div>
-      <div class="track-title">M3 Supply Chain Expert</div>
-      <div class="track-code-line">Infor Certified Expert — M3 Supply Chain</div>
-      <div class="track-desc">Customer orders (OIS100), purchase orders (PPS200), warehouse management (MWS), inventory control (MMS), agreements, delivery schedules, distribution orders, ATP/CTP, and multi-site supply chain configuration.</div>
-      <div class="track-tags">
-        <span class="ttag">Sales Orders</span><span class="ttag">Procurement</span><span class="ttag">Warehouse</span><span class="ttag">Inventory</span><span class="ttag">ATP/CTP</span>
-      </div>
-      <div class="track-sel-ring" id="ring-scm"></div>
-    </div>
-  </div><!-- /core grid -->
-
-  <div class="track-group-divider"></div>
-
-  <!-- ── Group 2: Cloud Certifications ─────────────────────────── -->
-  <div class="track-group-label cloud">
-    <span class="tgl-dot"></span>
-    Cloud Certifications
-  </div>
-  <div class="track-grid">
-    <!-- M3-537 Cloud Distribution -->
-    <div class="track-card" id="card-dist" onclick="selectTrack('dist')">
-      <div class="track-exam-code tc-dist">M3-537</div>
-      <div class="track-icon-wrap ti-dist">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      </div>
-      <div class="track-title">M3 Cloud Distribution</div>
-      <div class="track-code-line">Infor Certified M3 Cloud Distribution Enterprise Associate</div>
-      <div class="track-desc">Order-to-cash (OIS), procure-to-pay (PPS), warehouse management (MWS), pricing &amp; discounts, inventory (MMS), item &amp; customer master setup, delivery processing, invoicing, and returns.</div>
-      <div class="track-tags">
-        <span class="ttag">Order-to-Cash</span><span class="ttag">Procure-to-Pay</span><span class="ttag">Warehouse</span><span class="ttag">Pricing</span>
-      </div>
-      <div class="track-sel-ring" id="ring-dist"></div>
-    </div>
-    <!-- M3-502 Cloud Finance -->
-    <div class="track-card" id="card-cf2" onclick="selectTrack('cf2')">
-      <div class="track-exam-code tc-cf2">M3-502</div>
-      <div class="track-icon-wrap ti-cf2">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-      </div>
-      <div class="track-title">M3 Cloud Finance</div>
-      <div class="track-code-line">Infor Certified M3 Cloud Finance Consultant</div>
-      <div class="track-desc">General Ledger (GLS), Accounts Payable (APS), Accounts Receivable (ARS), Fixed Assets (FAS), FAM functions, VAT, currency management, payment categories, accounting rules (CRS395), and period-end closing.</div>
-      <div class="track-tags">
-        <span class="ttag">GL / FAM</span><span class="ttag">AP / AR</span><span class="ttag">Fixed Assets</span><span class="ttag">VAT</span><span class="ttag">Currency</span>
-      </div>
-      <div class="track-sel-ring" id="ring-cf2"></div>
-    </div>
-    <!-- M3-535 Cloud Food & Beverage -->
-    <div class="track-card" id="card-fnb" onclick="selectTrack('fnb')">
-      <div class="track-exam-code tc-fnb">M3-535</div>
-      <div class="track-icon-wrap ti-fnb">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-      </div>
-      <div class="track-title">M3 Cloud Food &amp; Beverage</div>
-      <div class="track-code-line">Infor Certified M3 Cloud Food and Beverage Associate</div>
-      <div class="track-desc">Catch weight, lot &amp; batch traceability, FEFO/shelf life, aging &amp; reclassification, potency, co-products &amp; by-products, quality inspection, allergen management, recipe/formula management, and food safety compliance (HACCP/FSMA).</div>
-      <div class="track-tags">
-        <span class="ttag">Catch Weight</span><span class="ttag">Lot Traceability</span><span class="ttag">FEFO / Shelf Life</span><span class="ttag">Quality</span>
-      </div>
-      <div class="track-sel-ring" id="ring-fnb"></div>
-    </div>
-    <!-- M3-518 Cloud Warehousing & Procurement -->
-    <div class="track-card" id="card-wap" onclick="selectTrack('wap')">
-      <div class="track-exam-code tc-wap">M3-518</div>
-      <div class="track-icon-wrap ti-wap">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><rect x="4" y="4" width="16" height="12" rx="1"/><line x1="8" y1="12" x2="8" y2="16"/><line x1="12" y1="10" x2="12" y2="16"/><line x1="16" y1="12" x2="16" y2="16"/></svg>
-      </div>
-      <div class="track-title">M3 Cloud Warehousing &amp; Procurement</div>
-      <div class="track-code-line">Infor Certified M3 Cloud Warehousing &amp; Procurement Consultant</div>
-      <div class="track-desc">Warehouse setup (MMS005/MWS010), inbound receiving &amp; putaway (MWS440/445), outbound picking &amp; dispatch (MWS410/435), location management (MMS160), procurement (PPS200/300), supplier agreements (PPS100), replenishment, and shipment management.</div>
-      <div class="track-tags">
-        <span class="ttag">Receiving / Putaway</span><span class="ttag">Picking / Dispatch</span><span class="ttag">Procurement</span><span class="ttag">Replenishment</span>
-      </div>
-      <div class="track-sel-ring" id="ring-wap"></div>
-    </div>
-    <!-- M3-516 Cloud Sales Management & Logistics -->
-    <div class="track-card" id="card-sml" onclick="selectTrack('sml')">
-      <div class="track-exam-code tc-sml">M3-516</div>
-      <div class="track-icon-wrap ti-sml">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4"/><circle cx="7" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>
-      </div>
-      <div class="track-title">M3 Sales Management &amp; Logistics</div>
-      <div class="track-code-line">Infor Certified M3 Cloud Sales Management &amp; Logistics Consultant</div>
-      <div class="track-desc">Customer order lifecycle (OIS100–OIS180), order types (OIS010), pricing &amp; discounts (OIS017/OIS030), quotations, delivery schedules, invoicing, credit management, routes &amp; transport (DRS005/DRS100), and proof of delivery.</div>
-      <div class="track-tags">
-        <span class="ttag">Customer Orders</span><span class="ttag">Pricing / Discounts</span><span class="ttag">Invoicing</span><span class="ttag">Logistics / Routes</span>
-      </div>
-      <div class="track-sel-ring" id="ring-sml"></div>
+      <button class="btn btn-ghost btn-sm" onclick="showScreen('retrieve-cert')" style="border-color:rgba(52,211,153,.25);color:var(--emerald);margin-top:4px;">🏆 Re-download Certificate</button>
     </div>
   </div>
 
-  <div style="text-align:center;margin-bottom:16px;">
-    <button class="btn btn-ghost btn-sm" onclick="showScreen('retrieve-cert')" style="border-color:rgba(52,211,153,.25);color:var(--emerald);">🏆 Already passed? Re-download your certificate</button>
+  <!-- ── Core M3 Certifications ── -->
+  <div class="cert-group cert-group-core">
+    <div class="track-group-label">
+      <span class="tgl-badge tgl-badge-core">● Core M3 Certifications</span>
+      <span class="tgl-count">3 exams</span>
+    </div>
+    <div class="track-grid">
+
+      <!-- M3-123 Finance -->
+      <div class="track-card" id="card-fin" onclick="selectTrack('fin')">
+        <div class="track-exam-code tc-fin">M3-123</div>
+        <div class="track-icon-wrap ti-fin">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0a0b0d" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="track-title">M3 Finance Consultant</div>
+        <div class="track-code-line">Infor Certified M3 Finance Consultant</div>
+        <div class="track-tags"><span class="ttag">AP / AR</span><span class="ttag">GL</span><span class="ttag">Cost Accounting</span><span class="ttag">FAM</span><span class="ttag">VAT</span></div>
+        <div class="track-sel-ring" id="ring-fin"></div>
+      </div>
+
+      <!-- M3-504 Manufacturing -->
+      <div class="track-card" id="card-mfg" onclick="selectTrack('mfg')">
+        <div class="track-exam-code tc-mfg">M3-504</div>
+        <div class="track-icon-wrap ti-mfg">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M21 12h-2M17.66 17.66l-1.41-1.41M12 21v-2M6.34 17.66l-1.41 1.41M3 12H1M6.34 6.34L4.93 4.93M12 3V1"/></svg>
+        </div>
+        <div class="track-title">M3 Cloud Manufacturing</div>
+        <div class="track-code-line">Infor Certified M3 Cloud Manufacturing &amp; Planning</div>
+        <div class="track-tags"><span class="ttag">BOM / Routing</span><span class="ttag">MRP / MPS</span><span class="ttag">Capacity</span><span class="ttag">MO Lifecycle</span></div>
+        <div class="track-sel-ring" id="ring-mfg"></div>
+      </div>
+
+      <!-- IM3-310 Supply Chain -->
+      <div class="track-card" id="card-scm" onclick="selectTrack('scm')">
+        <div class="track-exam-code tc-scm">IM3-310</div>
+        <div class="track-icon-wrap ti-scm">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="track-title">M3 Supply Chain Expert</div>
+        <div class="track-code-line">Infor Certified Expert — M3 Supply Chain</div>
+        <div class="track-tags"><span class="ttag">Sales Orders</span><span class="ttag">Procurement</span><span class="ttag">Warehouse</span><span class="ttag">ATP/CTP</span></div>
+        <div class="track-sel-ring" id="ring-scm"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Cloud Certifications ── -->
+  <div class="cert-group cert-group-cloud">
+    <div class="track-group-label">
+      <span class="tgl-badge tgl-badge-cloud">● Cloud Certifications</span>
+      <span class="tgl-count">5 exams</span>
+    </div>
+    <div class="track-grid-5">
+
+      <!-- M3-537 Cloud Distribution -->
+      <div class="track-card" id="card-dist" onclick="selectTrack('dist')">
+        <div class="track-exam-code tc-dist">M3-537</div>
+        <div class="track-icon-wrap ti-dist">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="track-title">M3 Cloud Distribution</div>
+        <div class="track-code-line">Infor Certified M3 Cloud Distribution Enterprise Associate</div>
+        <div class="track-tags"><span class="ttag">Order-to-Cash</span><span class="ttag">Procure-to-Pay</span><span class="ttag">Pricing</span></div>
+        <div class="track-sel-ring" id="ring-dist"></div>
+      </div>
+
+      <!-- M3-502 Cloud Finance -->
+      <div class="track-card" id="card-cf2" onclick="selectTrack('cf2')">
+        <div class="track-exam-code tc-cf2">M3-502</div>
+        <div class="track-icon-wrap ti-cf2">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="track-title">M3 Cloud Finance</div>
+        <div class="track-code-line">Infor Certified M3 Cloud Finance Consultant</div>
+        <div class="track-tags"><span class="ttag">GL / FAM</span><span class="ttag">AP / AR</span><span class="ttag">Fixed Assets</span><span class="ttag">VAT</span></div>
+        <div class="track-sel-ring" id="ring-cf2"></div>
+      </div>
+
+      <!-- M3-535 Cloud Food & Beverage -->
+      <div class="track-card" id="card-fnb" onclick="selectTrack('fnb')">
+        <div class="track-exam-code tc-fnb">M3-535</div>
+        <div class="track-icon-wrap ti-fnb">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <div class="track-title">M3 Cloud Food &amp; Beverage</div>
+        <div class="track-code-line">Infor Certified M3 Cloud Food and Beverage Associate</div>
+        <div class="track-tags"><span class="ttag">Catch Weight</span><span class="ttag">FEFO</span><span class="ttag">Quality</span></div>
+        <div class="track-sel-ring" id="ring-fnb"></div>
+      </div>
+
+      <!-- M3-518 Cloud Warehousing & Procurement -->
+      <div class="track-card" id="card-wap" onclick="selectTrack('wap')">
+        <div class="track-exam-code tc-wap">M3-518</div>
+        <div class="track-icon-wrap ti-wap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><rect x="4" y="4" width="16" height="12" rx="1"/><line x1="8" y1="12" x2="8" y2="16"/><line x1="12" y1="10" x2="12" y2="16"/><line x1="16" y1="12" x2="16" y2="16"/></svg>
+        </div>
+        <div class="track-title">M3 Cloud Warehousing &amp; Procurement</div>
+        <div class="track-code-line">Infor Certified M3 Cloud Warehousing &amp; Procurement Consultant</div>
+        <div class="track-tags"><span class="ttag">Receiving</span><span class="ttag">Picking</span><span class="ttag">Procurement</span></div>
+        <div class="track-sel-ring" id="ring-wap"></div>
+      </div>
+
+      <!-- M3-516 Cloud Sales Management & Logistics -->
+      <div class="track-card" id="card-sml" onclick="selectTrack('sml')">
+        <div class="track-exam-code tc-sml">M3-516</div>
+        <div class="track-icon-wrap ti-sml">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4"/><circle cx="7" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>
+        </div>
+        <div class="track-title">M3 Sales Management &amp; Logistics</div>
+        <div class="track-code-line">Infor Certified M3 Cloud Sales Management &amp; Logistics Consultant</div>
+        <div class="track-tags"><span class="ttag">Customer Orders</span><span class="ttag">Invoicing</span><span class="ttag">Routes</span></div>
+        <div class="track-sel-ring" id="ring-sml"></div>
+      </div>
+
+    </div>
   </div>
   <div class="reg-card" id="reg-card">
     <div class="reg-track-prompt" id="reg-track-label">← Select a certification track above to begin</div>

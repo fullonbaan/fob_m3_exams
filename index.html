@@ -3047,50 +3047,149 @@ function drawCert(name,pct,certId,date,trackFull){
     const ctx=cv.getContext('2d');
     const W=1200,H=850;
     cv.width=W;cv.height=H;
-    const bg=ctx.createLinearGradient(0,0,W,H);
-    bg.addColorStop(0,'#FDFAF0');bg.addColorStop(.5,'#FBF7E6');bg.addColorStop(1,'#F8F4DC');
-    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-    const gl=ctx.createRadialGradient(W/2,0,0,W/2,0,520);
-    gl.addColorStop(0,'rgba(212,175,55,.12)');gl.addColorStop(1,'transparent');
-    ctx.fillStyle=gl;ctx.fillRect(0,0,W,H);
-    const brd=ctx.createLinearGradient(0,0,W,0);
-    brd.addColorStop(0,'transparent');brd.addColorStop(.25,'#D4AF37');brd.addColorStop(.5,'#FFD700');brd.addColorStop(.75,'#D4AF37');brd.addColorStop(1,'transparent');
-    ctx.strokeStyle=brd;ctx.lineWidth=3;ctx.strokeRect(34,34,W-68,H-68);
-    const brd2=ctx.createLinearGradient(0,0,W,0);
-    brd2.addColorStop(0,'transparent');brd2.addColorStop(.5,'rgba(212,175,55,.38)');brd2.addColorStop(1,'transparent');
-    ctx.strokeStyle=brd2;ctx.lineWidth=1;ctx.strokeRect(48,48,W-96,H-96);
-    [[68,68],[W-68,68],[68,H-68],[W-68,H-68]].forEach(([x,y])=>{
-      ctx.beginPath();ctx.arc(x,y,20,0,Math.PI*2);ctx.strokeStyle='rgba(201,147,10,.55)';ctx.lineWidth=1.5;ctx.stroke();
-      ctx.beginPath();ctx.arc(x,y,10,0,Math.PI*2);ctx.fillStyle='rgba(212,175,55,.22)';ctx.fill();
-    });
-    ctx.textAlign='center';ctx.fillStyle='#8B6914';
-    ctx.font='bold 13px Arial';ctx.fillText('FULLONBAAN EDUCATION',W/2,108);
-    const dv=ctx.createLinearGradient(W/2-220,0,W/2+220,0);
-    dv.addColorStop(0,'transparent');dv.addColorStop(.5,'rgba(201,147,10,.65)');dv.addColorStop(1,'transparent');
-    ctx.beginPath();ctx.strokeStyle=dv;ctx.lineWidth=1;ctx.moveTo(W/2-220,126);ctx.lineTo(W/2+220,126);ctx.stroke();
-    ctx.fillStyle='rgba(139,105,20,.72)';ctx.font='14px Arial';ctx.fillText('CERTIFICATE OF ACHIEVEMENT',W/2,166);
-    ctx.fillStyle='rgba(139,105,20,.75)';ctx.font='italic 17px Georgia,serif';ctx.fillText('This certifies that',W/2,250);
-    const ng=ctx.createLinearGradient(W/2-300,0,W/2+300,0);
-    ng.addColorStop(0,'#8B6914');ng.addColorStop(.5,'#FFD700');ng.addColorStop(1,'#8B6914');
-    ctx.fillStyle=ng;ctx.font='bold 50px Georgia,serif';ctx.fillText(name,W/2,320);
-    const uw=Math.min(ctx.measureText(name).width+80,580);
-    const ul=ctx.createLinearGradient(W/2-uw/2,0,W/2+uw/2,0);
-    ul.addColorStop(0,'transparent');ul.addColorStop(.5,'rgba(212,175,55,.70)');ul.addColorStop(1,'transparent');
-    ctx.beginPath();ctx.strokeStyle=ul;ctx.lineWidth=1.5;ctx.moveTo(W/2-uw/2,336);ctx.lineTo(W/2+uw/2,336);ctx.stroke();
-    ctx.fillStyle='rgba(90,56,0,.82)';ctx.font='17px Georgia,serif';ctx.fillText('has successfully passed the',W/2,382);
-    ctx.font='bold 22px Georgia,serif';ctx.fillStyle='#6B4A00';ctx.fillText(trackFull,W/2,414);
-    ctx.fillStyle='rgba(139,105,20,.75)';ctx.font='15px Arial';ctx.fillText('with a score of',W/2,460);
-    ctx.font='bold 38px Georgia,serif';
-    const sg=ctx.createLinearGradient(W/2-50,0,W/2+50,0);
-    sg.addColorStop(0,'#C9930A');sg.addColorStop(.5,'#FFD700');sg.addColorStop(1,'#C9930A');
-    ctx.fillStyle=sg;ctx.fillText(`${pct}%`,W/2,504);
-    const fd=ctx.createLinearGradient(W/2-300,0,W/2+300,0);
-    fd.addColorStop(0,'transparent');fd.addColorStop(.5,'rgba(212,175,55,.45)');fd.addColorStop(1,'transparent');
-    ctx.beginPath();ctx.strokeStyle=fd;ctx.lineWidth=1;ctx.moveTo(W/2-300,548);ctx.lineTo(W/2+300,548);ctx.stroke();
-    ctx.font='13px "Courier New",monospace';ctx.fillStyle='rgba(107,74,0,.80)';
-    ctx.fillText(`Date: ${date}`,W/2-180,582);ctx.fillText(`Certificate ID: ${certId}`,W/2+150,582);
-    ctx.fillStyle='rgba(139,105,20,.42)';ctx.font='italic 11px Arial';
-    ctx.fillText('This is a computer generated certificate — No signature required',W/2,760);
+
+    /* ── Helper: rounded rect ── */
+    function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();}
+
+    /* ══ 1. BACKGROUND — deep navy with subtle radial light ══ */
+    const bgG=ctx.createLinearGradient(0,0,W,H);
+    bgG.addColorStop(0,'#0a1628');bgG.addColorStop(0.5,'#0f1f3d');bgG.addColorStop(1,'#0a1628');
+    ctx.fillStyle=bgG;ctx.fillRect(0,0,W,H);
+    /* Soft radial glow at top-center */
+    const rg=ctx.createRadialGradient(W/2,0,0,W/2,0,600);
+    rg.addColorStop(0,'rgba(79,140,255,.08)');rg.addColorStop(1,'transparent');
+    ctx.fillStyle=rg;ctx.fillRect(0,0,W,H);
+    /* Subtle corner glow bottom-right */
+    const cg=ctx.createRadialGradient(W-100,H-100,0,W-100,H-100,400);
+    cg.addColorStop(0,'rgba(212,175,55,.05)');cg.addColorStop(1,'transparent');
+    ctx.fillStyle=cg;ctx.fillRect(0,0,W,H);
+
+    /* ══ 2. BORDER — thin gold frame with inner glow ══ */
+    const brdG=ctx.createLinearGradient(0,0,W,0);
+    brdG.addColorStop(0,'#8B6914');brdG.addColorStop(.3,'#D4AF37');brdG.addColorStop(.5,'#FFD700');brdG.addColorStop(.7,'#D4AF37');brdG.addColorStop(1,'#8B6914');
+    ctx.strokeStyle=brdG;ctx.lineWidth=2;ctx.strokeRect(28,28,W-56,H-56);
+    ctx.strokeStyle='rgba(212,175,55,.15)';ctx.lineWidth=1;ctx.strokeRect(36,36,W-72,H-72);
+
+    /* ══ 3. TOP ACCENT BAR ══ */
+    const topBar=ctx.createLinearGradient(80,0,W-80,0);
+    topBar.addColorStop(0,'transparent');topBar.addColorStop(.2,'#C8960C');topBar.addColorStop(.5,'#FFD700');topBar.addColorStop(.8,'#C8960C');topBar.addColorStop(1,'transparent');
+    ctx.fillStyle=topBar;ctx.fillRect(80,28,W-160,3);
+
+    /* ══ 4. HEADER — "FULLONBAAN" branding ══ */
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.font='bold 11px Arial';ctx.fillStyle='#D4AF37';ctx.letterSpacing='8px';
+    ctx.fillText('F U L L O N B A A N',W/2,78);
+    ctx.font='9px Arial';ctx.fillStyle='rgba(164,192,249,.5)';
+    ctx.fillText('E D U C A T I O N',W/2,96);
+    /* Gold divider under branding */
+    const hd=ctx.createLinearGradient(W/2-180,0,W/2+180,0);
+    hd.addColorStop(0,'transparent');hd.addColorStop(.5,'rgba(212,175,55,.5)');hd.addColorStop(1,'transparent');
+    ctx.beginPath();ctx.strokeStyle=hd;ctx.lineWidth=1;ctx.moveTo(W/2-180,112);ctx.lineTo(W/2+180,112);ctx.stroke();
+
+    /* ══ 5. CERTIFICATE TITLE ══ */
+    ctx.font='bold 14px Arial';ctx.fillStyle='rgba(164,192,249,.6)';
+    ctx.fillText('CERTIFICATE OF ACHIEVEMENT',W/2,140);
+
+    /* ══ 6. DECORATIVE ORNAMENT ══ */
+    ctx.fillStyle='rgba(212,175,55,.4)';ctx.font='14px serif';
+    ctx.fillText('◆   ◆   ◆',W/2,172);
+
+    /* ══ 7. "This certifies that" ══ */
+    ctx.font='italic 18px Georgia,serif';ctx.fillStyle='rgba(200,200,220,.7)';
+    ctx.fillText('This certifies that',W/2,210);
+
+    /* ══ 8. CANDIDATE NAME — large, gold shimmer ══ */
+    const nameG=ctx.createLinearGradient(W/2-300,0,W/2+300,0);
+    nameG.addColorStop(0,'#C8960C');nameG.addColorStop(.3,'#FFD700');nameG.addColorStop(.5,'#FFF5B8');nameG.addColorStop(.7,'#FFD700');nameG.addColorStop(1,'#C8960C');
+    ctx.fillStyle=nameG;ctx.font='bold 52px Georgia,serif';
+    ctx.fillText(name,W/2,276);
+    /* Name underline */
+    const nw=Math.min(ctx.measureText(name).width+80,640);
+    const nlG=ctx.createLinearGradient(W/2-nw/2,0,W/2+nw/2,0);
+    nlG.addColorStop(0,'transparent');nlG.addColorStop(.5,'rgba(212,175,55,.6)');nlG.addColorStop(1,'transparent');
+    ctx.beginPath();ctx.strokeStyle=nlG;ctx.lineWidth=1;ctx.moveTo(W/2-nw/2,296);ctx.lineTo(W/2+nw/2,296);ctx.stroke();
+
+    /* ══ 9. BODY TEXT ══ */
+    ctx.font='18px Georgia,serif';ctx.fillStyle='rgba(200,200,220,.75)';
+    ctx.fillText('has successfully passed the',W/2,336);
+    ctx.font='bold 24px Georgia,serif';ctx.fillStyle='#FFFFFF';
+    ctx.fillText(trackFull,W/2,374);
+
+    /* ══ 10. SCORE — prominent ══ */
+    ctx.font='16px Arial';ctx.fillStyle='rgba(164,192,249,.5)';
+    ctx.fillText('with a score of',W/2,418);
+    const scG=ctx.createLinearGradient(W/2-60,0,W/2+60,0);
+    scG.addColorStop(0,'#C8960C');scG.addColorStop(.5,'#FFD700');scG.addColorStop(1,'#C8960C');
+    ctx.fillStyle=scG;ctx.font='bold 44px Georgia,serif';
+    ctx.fillText(pct+'%',W/2,470);
+
+    /* ══ 11. DIVIDER ══ */
+    const dvG=ctx.createLinearGradient(W/2-280,0,W/2+280,0);
+    dvG.addColorStop(0,'transparent');dvG.addColorStop(.5,'rgba(212,175,55,.4)');dvG.addColorStop(1,'transparent');
+    ctx.beginPath();ctx.strokeStyle=dvG;ctx.lineWidth=1;ctx.moveTo(W/2-280,506);ctx.lineTo(W/2+280,506);ctx.stroke();
+
+    /* ══ 12. DATE & CERT ID ══ */
+    ctx.font='13px "Courier New",monospace';ctx.fillStyle='rgba(164,192,249,.55)';
+    ctx.fillText('Date: '+date,W/2-180,540);
+    ctx.fillText('Certificate ID: '+certId,W/2+180,540);
+
+    /* ══ 13. CERTIFICATION BADGE — Oracle-style with horizontal text ══ */
+    const bx=W/2, by=650;
+    ctx.save();
+    /* Outer shield/badge shape — rounded rectangle */
+    const bw=200, bh=120, brad=14;
+    roundRect(bx-bw/2, by-bh/2, bw, bh, brad);
+    const badgeBg=ctx.createLinearGradient(bx-bw/2, by-bh/2, bx+bw/2, by+bh/2);
+    badgeBg.addColorStop(0,'#1a3a6e');badgeBg.addColorStop(.5,'#1e4a8a');badgeBg.addColorStop(1,'#1a3a6e');
+    ctx.fillStyle=badgeBg;ctx.fill();
+    /* Badge border — gold */
+    roundRect(bx-bw/2, by-bh/2, bw, bh, brad);
+    const badgeBrd=ctx.createLinearGradient(bx-bw/2,by-bh/2,bx+bw/2,by+bh/2);
+    badgeBrd.addColorStop(0,'#8B6914');badgeBrd.addColorStop(.5,'#D4AF37');badgeBrd.addColorStop(1,'#8B6914');
+    ctx.strokeStyle=badgeBrd;ctx.lineWidth=2;ctx.stroke();
+    /* Inner border */
+    roundRect(bx-bw/2+4, by-bh/2+4, bw-8, bh-8, brad-2);
+    ctx.strokeStyle='rgba(212,175,55,.25)';ctx.lineWidth=1;ctx.stroke();
+
+    /* Badge text — horizontal, stacked */
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    /* "FULLONBAAN" */
+    ctx.font='bold 13px Arial';ctx.fillStyle='#D4AF37';
+    ctx.fillText('FULLONBAAN',bx,by-36);
+    /* Gold accent line */
+    ctx.beginPath();ctx.strokeStyle='rgba(212,175,55,.4)';ctx.lineWidth=1;
+    ctx.moveTo(bx-60,by-22);ctx.lineTo(bx+60,by-22);ctx.stroke();
+    /* "Certified" */
+    ctx.font='italic 22px Georgia,serif';ctx.fillStyle='#FFFFFF';
+    ctx.fillText('Certified',bx,by-2);
+    /* Another accent line */
+    ctx.beginPath();ctx.strokeStyle='rgba(212,175,55,.4)';ctx.lineWidth=1;
+    ctx.moveTo(bx-60,by+14);ctx.lineTo(bx+60,by+14);ctx.stroke();
+    /* "Infor M3 Associate" */
+    ctx.font='bold 11px Arial';ctx.fillStyle='rgba(164,192,249,.7)';
+    ctx.fillText('INFOR M3 ASSOCIATE',bx,by+34);
+    /* Small checkmark circle at top of badge */
+    ctx.beginPath();ctx.arc(bx,by-bh/2,14,0,Math.PI*2);
+    const ckG=ctx.createRadialGradient(bx,by-bh/2-4,0,bx,by-bh/2,14);
+    ckG.addColorStop(0,'#34d399');ckG.addColorStop(1,'#059669');
+    ctx.fillStyle=ckG;ctx.fill();
+    ctx.strokeStyle='#0a1628';ctx.lineWidth=3;ctx.stroke();
+    ctx.font='bold 14px Arial';ctx.fillStyle='#FFFFFF';ctx.textBaseline='middle';
+    ctx.fillText('✓',bx,by-bh/2+1);
+    ctx.restore();
+
+    /* ══ 14. BOTTOM ACCENT BAR ══ */
+    const botBar=ctx.createLinearGradient(80,0,W-80,0);
+    botBar.addColorStop(0,'transparent');botBar.addColorStop(.2,'#C8960C');botBar.addColorStop(.5,'#FFD700');botBar.addColorStop(.8,'#C8960C');botBar.addColorStop(1,'transparent');
+    ctx.fillStyle=botBar;ctx.fillRect(80,H-31,W-160,3);
+
+    /* ══ 15. FOOTER ══ */
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillStyle='rgba(164,192,249,.3)';ctx.font='italic 11px Arial';
+    ctx.fillText('This is a computer generated certificate — No signature required',W/2,H-60);
+    ctx.fillStyle='rgba(164,192,249,.2)';ctx.font='9px Arial';
+    ctx.fillText('fullonbaan.com',W/2,H-44);
+
     resolve(cv.toDataURL('image/png'));
   });
 }

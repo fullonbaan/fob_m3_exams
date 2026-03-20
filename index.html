@@ -2575,6 +2575,15 @@ function showScreen(id){
   document.getElementById(id).classList.add('active');
   window.scrollTo({top:0, behavior:'smooth'});
 }
+
+/* ── Hash-based routing for #admin ── */
+function handleHash(){
+  var h = window.location.hash.replace('#','').toLowerCase();
+  if(h === 'admin') showScreen('admin-login');
+}
+window.addEventListener('hashchange', handleHash);
+if(window.location.hash) handleHash();
+
 function goHome(){
   clearInterval(timerInt);
   track=''; QS=[]; candidate={}; answers={}; skipped=new Set();
@@ -2752,7 +2761,7 @@ function submitUTR(){
 async function notifyAdminPayment(utr){
   const cfg=TRACKS[track];
   const t=new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'});
-  const p={cust_name:candidate.name,candidate_name:candidate.name,to_email:candidate.email,candidate_email:candidate.email,cust_mobile:candidate.mob,candidate_mobile:candidate.mob,guide:cfg.label,exam_track:cfg.label,utr_number:utr,amount:'₹'+EXAM_PRICE,payment_amount:'₹'+EXAM_PRICE,order_ref:cfg.regPrefix+Date.now().toString(36).toUpperCase(),submission_time:t,reply_to:'fobsupport@gmail.com'};
+  const p={cust_name:candidate.name,candidate_name:candidate.name,to_email:candidate.email,candidate_email:candidate.email,cust_email:candidate.email,cust_mobile:candidate.mob,candidate_mobile:candidate.mob,guide:cfg.label,exam_track:cfg.label,utr_number:utr,amount:'₹'+EXAM_PRICE,payment_amount:'₹'+EXAM_PRICE,order_ref:cfg.regPrefix+Date.now().toString(36).toUpperCase(),submission_time:t,reply_to:'fobsupport@gmail.com'};
   const pause=ms=>new Promise(r=>setTimeout(r,ms));
   try{
     await emailjs.send(PAY_EMAILJS_SVC,PAY_EMAILJS_TPL,{...p,to_email:candidate.email,to_name:candidate.name},PAY_EMAILJS_PUB);

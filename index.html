@@ -40,15 +40,27 @@ a{color:inherit;text-decoration:none;}
 .screen.active{display:block;}
 
 /* ── HEADER ── */
-header{background:var(--surf);border-bottom:1px solid var(--rim);padding:0 28px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:99;}
-.hdr-brand{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;}
-.hdr-gem{width:30px;height:30px;border-radius:8px;background:var(--gGold);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#0a0b0d;font-family:var(--mono);}
-.hdr-pill{font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--gold);letter-spacing:.04em;}
-.hdr-nav{display:flex;align-items:center;gap:6px;}
-.hdr-link{font-size:12px;color:var(--textM);padding:5px 10px;border-radius:6px;transition:background .15s,color .15s;}
-.hdr-link:hover{background:var(--surf2);color:var(--text);}
+header{background:var(--surf);border-bottom:1px solid var(--rim);padding:0 28px;height:64px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;position:sticky;top:0;z-index:99;box-shadow:var(--smMd);}
+header::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--rim2) 25%,var(--rim2) 75%,transparent);}
+.hdr-brand{display:flex;align-items:center;gap:10px;}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.logo-gem{width:40px;height:40px;border-radius:11px;background:var(--gBlue);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:17px;font-weight:700;box-shadow:0 4px 18px rgba(79,140,255,.35),inset 0 1px 0 rgba(255,255,255,.2);flex-shrink:0;transition:transform var(--dur),box-shadow var(--dur);}
+.logo-gem:hover{transform:scale(1.07);}
+.logo-name{font-family:var(--serif);font-size:17px;font-weight:700;line-height:1.1;background:var(--gBlue);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.logo-tag{font-size:9px;color:var(--textM);font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;}
+.hdr-pill{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);background:rgba(79,140,255,.07);border:1px solid rgba(79,140,255,.18);padding:6px 16px;border-radius:20px;}
+[data-theme="light"] .hdr-pill{background:rgba(59,111,224,.05);border-color:rgba(59,111,224,.14);}
+.hdr-nav{display:flex;align-items:center;gap:8px;justify-content:flex-end;}
+.hdr-nav-btn{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;font-family:'Inter',sans-serif;padding:7px 14px;border-radius:20px;border:1px solid var(--rim2);background:var(--surf2);color:var(--textS);cursor:pointer;text-decoration:none;transition:background var(--dur),color var(--dur),border-color var(--dur),transform var(--dur);white-space:nowrap;}
+.hdr-nav-btn:hover{background:var(--surf3);color:var(--text);transform:translateY(-1px);}
+.hdr-nav-btn.gold{border-color:rgba(201,168,76,.28);background:rgba(201,168,76,.07);color:var(--gold);}
+.hdr-nav-btn.gold:hover{background:rgba(201,168,76,.14);color:var(--gold);}
+.hdr-nav-btn.teal{border-color:rgba(45,212,191,.28);background:rgba(45,212,191,.07);color:var(--teal);}
+.hdr-nav-btn.teal:hover{background:rgba(45,212,191,.14);color:var(--teal);}
 .theme-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--rim2);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--textS);transition:all .15s;}
 .theme-btn:hover{border-color:var(--gold);color:var(--gold);}
+@media(max-width:760px){.hdr-nav-btn span.hdr-nav-label{display:none;}.hdr-pill{display:none;}}
+@media(max-width:480px){.hdr-nav{gap:5px;}.hdr-nav-btn{padding:6px 10px;}}
 
 /* ── BUTTONS ── */
 .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .15s;font-family:'Inter',sans-serif;}
@@ -500,16 +512,29 @@ canvas#cert-canvas{display:none;}
 <body>
 
 <header>
-  <button class="btn btn-ghost btn-sm" onclick="showScreen('admin-login')" style="font-size:11px;padding:6px 12px;opacity:.55;" title="Admin">🛡️</button>
   <div class="hdr-brand">
-    <div class="hdr-gem">FOB</div>
-    <span>M3 Certification Portal</span>
-    <span class="hdr-pill">Beta</span>
+    <a class="logo" href="#" onclick="goHome()">
+      <div class="logo-gem">FOB</div>
+      <div>
+        <div class="logo-name">FullonBaan</div>
+        <div class="logo-tag">Education</div>
+      </div>
+    </a>
   </div>
+  <div class="hdr-pill">Infor M3 Certification Portal</div>
   <div class="hdr-nav">
+    <button class="hdr-nav-btn teal" onclick="showResumeModal()" title="Already paid? Enter approval code">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span class="hdr-nav-label">Already Paid?</span>
+    </button>
+    <button class="hdr-nav-btn gold" onclick="showScreen('retrieve-cert')" title="Re-download your certificate">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span class="hdr-nav-label">Certificate</span>
+    </button>
     <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
+    <button class="hdr-nav-btn" onclick="showScreen('admin-login')" style="font-size:11px;padding:6px 10px;opacity:.4;" title="Admin">🛡️</button>
   </div>
 </header>
 
@@ -839,7 +864,7 @@ canvas#cert-canvas{display:none;}
       </div>
     </div>
     <div style="text-align:center;margin-top:24px;font-size:13px;color:var(--textM);">
-      Payment issues? Email <a href="mailto:fullonbaan@gmail.com" style="color:var(--blue);text-decoration:none;">fullonbaan@gmail.com</a> with your UTR and registered email.
+      Payment issues? Email <a href="mailto:fullonbaan@gmail.com?subject=Payment%20Issue&body=Please%20include%20your%20UTR%20and%20registered%20email." style="color:var(--blue);text-decoration:none;">fullonbaan@gmail.com</a> with your UTR and registered email.
     </div>
   </div>
 </div>
@@ -871,7 +896,7 @@ canvas#cert-canvas{display:none;}
       </div>
       <span class="err" id="err-code-inline" style="display:none;font-size:12px;margin-top:6px;">Invalid code — please double-check the code sent by the admin.</span>
     </div>
-    <div style="margin-top:20px;font-size:14px;color:var(--textM);">Questions? Email <a href="mailto:fullonbaan@gmail.com" style="color:var(--blue);">fullonbaan@gmail.com</a></div>
+    <div style="margin-top:20px;font-size:14px;color:var(--textM);">Questions? Email <a href="mailto:fullonbaan@gmail.com?subject=Certification%20Query" style="color:var(--blue);">fullonbaan@gmail.com</a></div>
   </div>
 </div>
 
@@ -982,13 +1007,13 @@ canvas#cert-canvas{display:none;}
     <button class="btn btn-success" style="width:100%;margin-top:4px;justify-content:center;" onclick="resumeWithCode()">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg>Verify &amp; Begin Exam
     </button>
-    <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--textM);">Code not received yet? Email <a href="mailto:fullonbaan@gmail.com" style="color:var(--blue);">fullonbaan@gmail.com</a></div>
+    <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--textM);">Code not received yet? Email <a href="mailto:fullonbaan@gmail.com?subject=Exam%20Approval%20Code%20Request" style="color:var(--blue);">fullonbaan@gmail.com</a></div>
   </div>
 </div>
 
 <footer class="site-footer">
   <div class="ft-copy" style="line-height:1.8;">
-    fullonbaan@gmail.com · +91 63605 93122<br>
+    <a href="mailto:fullonbaan@gmail.com" style="color:inherit;text-decoration:none;">fullonbaan@gmail.com</a> · +91 63605 93122<br>
     © 2025 FullonBaan · One stop destination for IT solutions · Bangalore, India
   </div>
 </footer>
@@ -1184,11 +1209,7 @@ const QB_FIN = [
   opts:[{k:'A',t:'Purchase Order. Receive Goods (PPS300)'},{k:'B',t:'Purchase Order. Open (PPS200)'},{k:'C',t:'Supplier Invoice. Match GR Line (APS360)'},{k:'D',t:'Internal Account Entry. Open (CAS300)'}],
   correct:['C'],explanation:'APS360 (Supplier Invoice. Match GR Line) performs the three-way match — matching the supplier invoice against the purchase order and goods receipt to verify quantities and amounts.'},
 {id:7,cat:'proc',catL:'Processing',diff:'medium',multi:true,
-  text:'Which THREE of the following Infor M3 modules does the Accounts Payable module integrate with? (Choose three.)',
-  opts:[{k:'A',t:'General ledger'},{k:'B',t:'Time accounting'},{k:'C',t:'Accounts receivable'},{k:'D',t:'Purchase orders and purchase order processing'},{k:'E',t:'Budgeting'}],
-  correct:['A','C','D'],explanation:'AP integrates with: (A) General Ledger for posting, (C) Accounts Receivable for netting/offsets, and (D) Purchase Orders for invoice matching. Time accounting and Budgeting are not direct AP integration points.'},
-{id:8,cat:'setup',catL:'Setup & Configuration',diff:'medium',multi:false,
-  text:'You want account entries created for goods receipt when exiting PPS300 so that the GL is updated. Which "Create Account Entries at Goods Receipt" value must you select on CAS900?',
+  text:'Which THREE of the following Infor M3 modules does the Aso that the GL is updated. Which "Create Account Entries at Goods Receipt" value must you select on CAS900?',
   opts:[{k:'A',t:'2'},{k:'B',t:'1'},{k:'C',t:'3'},{k:'D',t:'4'}],
   correct:['B'],explanation:'Setting value 1 on CAS900 causes M3 to automatically generate cost accounting entries and update the GL when goods are received via PPS300, creating the goods receipt accrual in real time.'},
 {id:9,cat:'use',catL:'Using M3',diff:'hard',multi:false,

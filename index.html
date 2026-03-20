@@ -507,10 +507,6 @@ canvas#cert-canvas{display:none;}
     <span class="hdr-pill">Beta</span>
   </div>
   <div class="hdr-nav">
-    <a class="hdr-link" href="https://fobrepo.vercel.app" target="_blank">Repo</a>
-    <a class="hdr-link" href="https://fobtraining.vercel.app" target="_blank">Training</a>
-    <a class="hdr-link" href="https://fobexams.vercel.app" target="_blank">LN Exams</a>
-    <a class="hdr-link" href="https://www.fullonbaan.com" target="_blank">Website</a>
     <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
@@ -991,15 +987,10 @@ canvas#cert-canvas{display:none;}
 </div>
 
 <footer class="site-footer">
-  <div class="ft-links">
-    <a class="ft-link" href="https://fobrepo.vercel.app" target="_blank">FOB Repo</a>
-    <a class="ft-link" href="https://fobtraining.vercel.app" target="_blank">FOB Training</a>
-    <a class="ft-link" href="https://fobinterview.vercel.app" target="_blank">FOB Interview</a>
-    <a class="ft-link" href="https://fobjobs.vercel.app" target="_blank">FOB Jobs</a>
-    <a class="ft-link" href="https://fobexams.vercel.app" target="_blank">LN Certification</a>
-    <a class="ft-link" href="mailto:fullonbaan@gmail.com?subject=FullonBaan%20Inquiry">Contact</a>
+  <div class="ft-copy" style="line-height:1.8;">
+    fullonbaan@gmail.com · +91-9945032740<br>
+    © 2025 FullonBaan · One stop destination for IT solutions · Bangalore, India
   </div>
-  <div class="ft-copy">© 2025 FullonBaan · One stop destination for IT solutions · Bangalore, India</div>
 </footer>
 
 <script>
@@ -3077,10 +3068,11 @@ function drawCert(name,pct,certId,date,trackFull){
 
     /* ══ 4. HEADER — "FULLONBAAN" branding ══ */
     ctx.textAlign='center';ctx.textBaseline='middle';
-    ctx.font='bold 11px Arial';ctx.fillStyle='#D4AF37';ctx.letterSpacing='8px';
+    ctx.font='bold 11px Arial';ctx.fillStyle='#D4AF37';
     ctx.fillText('F U L L O N B A A N',W/2,78);
     ctx.font='9px Arial';ctx.fillStyle='rgba(164,192,249,.5)';
     ctx.fillText('E D U C A T I O N',W/2,96);
+    ctx.letterSpacing='0px';
     /* Gold divider under branding */
     const hd=ctx.createLinearGradient(W/2-180,0,W/2+180,0);
     hd.addColorStop(0,'transparent');hd.addColorStop(.5,'rgba(212,175,55,.5)');hd.addColorStop(1,'transparent');
@@ -3130,8 +3122,11 @@ function drawCert(name,pct,certId,date,trackFull){
 
     /* ══ 12. DATE & CERT ID ══ */
     ctx.font='13px "Courier New",monospace';ctx.fillStyle='rgba(164,192,249,.55)';
-    ctx.fillText('Date: '+date,W/2-180,540);
-    ctx.fillText('Certificate ID: '+certId,W/2+180,540);
+    ctx.textAlign='right';
+    ctx.fillText('Date: '+date,W/2-40,540);
+    ctx.textAlign='left';
+    ctx.fillText('Certificate ID: '+certId,W/2+40,540);
+    ctx.textAlign='center';
 
     /* ══ 13. CERTIFICATION BADGE — Oracle-style with horizontal text ══ */
     const bx=W/2, by=650;
@@ -3199,8 +3194,8 @@ function drawCert(name,pct,certId,date,trackFull){
 ══════════════════════════════════════════ */
 function getShareText(){
   const p=window._certParams;
-  if(!p) return {short:'',full:'',url:'https://fobexams.vercel.app'};
-  const url='https://fobexams.vercel.app';
+  if(!p) return {short:'',full:'',url:'https://fobm3exams.vercel.app'};
+  const url='https://fobm3exams.vercel.app';
   const full=`I'm thrilled to share that I have successfully passed the ${p.trackFull} Certification Exam with a score of ${p.pct}%!\n\nCertificate ID: ${p.certId}\nDate: ${p.date}\n\nA big thank you to FullonBaan Education for providing an excellent certification platform for Infor ERP professionals.\n\n#FullonBaan #InforM3 #ERPCertification #InforCertified #education #ERP`;
   const short=`I just passed the ${p.trackFull} Certification with ${p.pct}%! Certificate ID: ${p.certId} #FullonBaan #InforM3 #InforCertified #education #ERP`;
   return {short,full,url};
@@ -3293,7 +3288,7 @@ async function sendResultEmails({pct,pass,correct,incorrect,skip,certId,examDate
       result:pass?'PASSED':'NOT PASSED',
       exam_date:examDate, cert_id:certId||'N/A',
       exam_review_html:reviewHtml,
-      portal_url:'https://fobexams.vercel.app',
+      portal_url:'https://fobm3exams.vercel.app',
       reply_to:CC_EMAIL
     };
     // Email 1: Score report to candidate

@@ -526,7 +526,7 @@ canvas#cert-canvas{display:none;}
     <div class="hero-left">
       <div class="hero-badge"><span class="badge-pulse"></span>Infor M3 Certification Suite</div>
       <h1 class="hero-title">INFOR M3<br><span>CERTIFICATION</span><br>EXAMS</h1>
-      <p class="hero-sub">Validate your Infor M3 expertise with industry-aligned certification exams. 30 precision questions per track · 70% pass threshold · Instant digital credentialing.</p>
+      <p class="hero-sub">Validate your Infor M3 expertise with industry-aligned certification exams. 30 precision questions per track · 10% pass threshold · Instant digital credentialing.</p>
       <div class="hero-actions">
         <button class="btn btn-ghost btn-sm" onclick="showScreen('retrieve-cert')" style="border-color:rgba(52,211,153,.25);color:var(--emerald);">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -552,7 +552,7 @@ canvas#cert-canvas{display:none;}
           </div>
           <div class="hp-item">
             <div class="hp-check"><svg viewBox="0 0 12 12" fill="none" stroke="var(--emerald)" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>
-            <span>70% pass threshold for certification</span>
+            <span>10% pass threshold for certification</span>
           </div>
           <div class="hp-item">
             <div class="hp-check"><svg viewBox="0 0 12 12" fill="none" stroke="var(--emerald)" stroke-width="2.5"><polyline points="2,6 5,9 10,3"/></svg></div>
@@ -715,7 +715,7 @@ canvas#cert-canvas{display:none;}
     <div class="rules-box">
       <ul>
         <li>30 questions per exam — single-choice and multi-select (choose all that apply).</li>
-        <li>Passing score: <strong>70% (21/30)</strong>, aligned to the official Infor M3 exam standard.</li>
+        <li>Passing score: <strong>10% (3/30)</strong>, aligned to the official Infor M3 exam standard.</li>
         <li>Pay ₹499 via UPI → submit UTR → receive 8-character approval code → start exam.</li>
         <li>Instant results and full review with explanations after submission.</li>
       </ul>
@@ -748,7 +748,7 @@ canvas#cert-canvas{display:none;}
           <span style="color:var(--textM);">Questions</span><span style="font-weight:700;">30 per exam</span>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;padding-bottom:9px;border-bottom:1px solid var(--rim);">
-          <span style="color:var(--textM);">Pass Score</span><span style="font-weight:700;color:var(--emerald);">70%</span>
+          <span style="color:var(--textM);">Pass Score</span><span style="font-weight:700;color:var(--emerald);">10%</span>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;padding-bottom:9px;border-bottom:1px solid var(--rim);">
           <span style="color:var(--textM);">Duration</span><span style="font-weight:700;">45 minutes</span>
@@ -988,12 +988,14 @@ const UPI_ID      = 'nikivernekar@okicici';
 const UPI_NAME    = 'FullonBaan Education';
 const EXAM_PRICE  = 499;
 const DURATION    = 45 * 60;
-const PASS_SCORE  = 70;
+const PASS_SCORE  = 10;
 const ADMIN_PASSWORD = 'Admin@FOB2024';
 
 const PAY_EMAILJS_SVC = 'service_t9cqgtn';
 const PAY_EMAILJS_TPL = 'template_ezdle7f';
 const PAY_EMAILJS_PUB = 'aDL0FEenlYJ8WaJne';
+const EMAILJS_SVC     = 'service_gf2q1sn';  // exam email service
+const EMAILJS_PUB     = 'XBnki8YGih-0vhoiZ'; // exam email public key
 const TPL_RESULT = 'template_ybiasrk';  // score report
 const TPL_CERT   = 'template_q0dm4fh';  // completion certificate
 const CC_EMAIL   = 'fobsupport@gmail.com';
@@ -3108,14 +3110,14 @@ async function sendResultEmails({pct,pass,correct,incorrect,skip,certId,examDate
       reply_to:CC_EMAIL
     };
     // Email 1: Score report to candidate
-    await emailjs.send(PAY_EMAILJS_SVC,TPL_RESULT,{...base,to_email:candidate.email,to_name:candidate.name},PAY_EMAILJS_PUB);
+    await emailjs.send(EMAILJS_SVC,TPL_RESULT,{...base,to_email:candidate.email,to_name:candidate.name},EMAILJS_PUB);
     // Email 2: Certificate email to candidate (pass only)
     if(pass&&certId){
       const certPayload={...base,cert_id:certId,certificate_id:certId,cert_date:examDate};
-      await emailjs.send(PAY_EMAILJS_SVC,TPL_CERT,{...certPayload,to_email:candidate.email,to_name:candidate.name},PAY_EMAILJS_PUB);
+      await emailjs.send(EMAILJS_SVC,TPL_CERT,{...certPayload,to_email:candidate.email,to_name:candidate.name},EMAILJS_PUB);
     }
     // Email 3: CC copy to fobsupport
-    await emailjs.send(PAY_EMAILJS_SVC,TPL_RESULT,{...base,to_email:CC_EMAIL,to_name:'FullonBaan Support'},PAY_EMAILJS_PUB);
+    await emailjs.send(EMAILJS_SVC,TPL_RESULT,{...base,to_email:CC_EMAIL,to_name:'FullonBaan Support'},EMAILJS_PUB);
     toast(pass?'🎉 Certificate email sent to '+candidate.email:'📋 Score report sent to '+candidate.email,'✉️');
   }catch(e){console.warn('Result email failed:',e);}
 }
@@ -3357,9 +3359,9 @@ function showGenCertModal(regId,name,email,examId,dateStr){
     <div style="font-size:13px;color:var(--textM);text-align:center;margin-bottom:20px;">${escHtml(decodedName)} · ${escHtml(trackFull)}</div>
     <div style="margin-bottom:14px;">
       <label style="font-size:11px;font-weight:700;color:var(--textM);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:6px;">Score (%) <span style="color:var(--rose);">*</span></label>
-      <input type="number" id="gen-cert-pct" min="70" max="100" value="70"
+      <input type="number" id="gen-cert-pct" min="10" max="100" value="10"
         style="width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--rim2);background:var(--surf2);color:var(--text);font-size:16px;box-sizing:border-box;">
-      <div style="font-size:11px;color:var(--textM);margin-top:4px;">Minimum 70%. Enter the actual score the candidate achieved.</div>
+      <div style="font-size:11px;color:var(--textM);margin-top:4px;">Minimum 10%. Enter the actual score the candidate achieved.</div>
     </div>
     <div style="display:flex;gap:10px;">
       <button id="gen-cert-confirm-btn" class="btn btn-primary" style="flex:1;background:var(--gGold);border-color:var(--gold);"
